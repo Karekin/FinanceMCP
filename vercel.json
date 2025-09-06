@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "build/httpServer.js",
-      "use": "@vercel/node"
+  "functions": {
+    "build/httpServer.js": {
+      "maxDuration": 30
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
@@ -14,10 +13,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "build/httpServer.js": {
-      "maxDuration": 30
-    }
   }
 }
