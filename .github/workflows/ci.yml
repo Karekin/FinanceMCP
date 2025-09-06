@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI
 
 on:
   push:
@@ -26,11 +26,12 @@ jobs:
     - name: Run TypeScript compilation
       run: npm run build
       
+    - name: Run tests
+      run: npm test
+      
     - name: Check build output
       run: |
         ls -la build/
         test -f build/index.js
         test -f build/httpServer.js
-        echo "Build completed successfully!"
-
-
+        echo "✅ Build verification completed successfully!"
