@@ -10,9 +10,10 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755'); try{require('fs').chmodSync('build/httpServer.js','755')}catch(e){}\"",
+    "build": "npx tsc && node -e \"require('fs').chmodSync('build/index.js', '755'); try{require('fs').chmodSync('build/httpServer.js','755')}catch(e){}\"",
+    "build:vercel": "chmod +x node_modules/.bin/tsc 2>/dev/null || true && npx tsc --build && chmod +x build/index.js build/httpServer.js",
     "prepare": "npm run build",
-    "watch": "tsc --watch",
+    "watch": "npx tsc --watch",
     "inspector": "npx @modelcontextprotocol/inspector build/index.js",
     "dev": "node build/httpServer.js",
     "setup": "node build-setup.js",

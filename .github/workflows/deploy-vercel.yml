@@ -1,4 +1,4 @@
-name: Deploy Web Service
+name: Deploy to Vercel
 
 on:
   push:
@@ -23,7 +23,14 @@ jobs:
       run: npm ci
       
     - name: Build project
-      run: npm run build
+      run: npm run build:vercel
+      
+    - name: Verify build output
+      run: |
+        ls -la build/
+        test -f build/index.js
+        test -f build/httpServer.js
+        echo "Build verification completed successfully!"
       
     - name: Deploy to Vercel
       uses: amondnet/vercel-action@v25
@@ -34,25 +41,7 @@ jobs:
         working-directory: ./
         vercel-args: '--prod'
         
-    - name: Deploy to Railway
-      uses: bervProject/railway-deploy@v1.0.4
-      with:
-        railway-token: ${{ secrets.RAILWAY_TOKEN }}
-        service: finance-mcp
-        detach: true
-        
-    - name: Deploy to Render
-      uses: johnbeynon/render-deploy-action@v0.0.7
-      with:
-        service-id: ${{ secrets.RENDER_SERVICE_ID }}
-        api-key: ${{ secrets.RENDER_API_KEY }}
-        
-    - name: Deploy to DigitalOcean App Platform
-      uses: digitalocean/app_action@v1.0.0
-      with:
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-        app_id: ${{ secrets.DIGITALOCEAN_APP_ID }}
-        source_dir: ./
-        type: docker
-
-
+    - name: Set deployment URL
+      run: |
+        echo "Deployment completed successfully!"
+        echo "Your app is now live on Vercel"

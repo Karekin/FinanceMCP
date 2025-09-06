@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -10,18 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Setup Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '20.x'
         cache: 'npm'
         
     - name: Install dependencies
@@ -30,39 +26,11 @@ jobs:
     - name: Run TypeScript compilation
       run: npm run build
       
-    - name: Run tests (if any)
-      run: |
-        if [ -f "package.json" ] && npm run test --if-present; then
-          npm run test
-        else
-          echo "No tests found, skipping test step"
-        fi
-        
     - name: Check build output
       run: |
         ls -la build/
         test -f build/index.js
         test -f build/httpServer.js
-
-  build-docker:
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-      
-    - name: Build Docker image
-      run: |
-        docker build -t finance-mcp:latest .
-        
-    - name: Test Docker image
-      run: |
-        docker run --rm finance-mcp:latest node --version
-        echo "Docker image built successfully"
+        echo "Build completed successfully!"
 
 

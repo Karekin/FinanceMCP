@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build:vercel",
+  "builds": [
+    {
+      "src": "build/httpServer.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "build/httpServer.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "build/httpServer.js": {
+      "maxDuration": 30
+    }
+  }
+}
