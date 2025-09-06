@@ -1,14 +1,14 @@
 {
   "version": 2,
   "functions": {
-    "build/httpServer.js": {
+    "api/httpServer.js": {
       "maxDuration": 30
     }
   },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "build/httpServer.js"
+      "dest": "api/httpServer.js"
     }
   ],
   "env": {
