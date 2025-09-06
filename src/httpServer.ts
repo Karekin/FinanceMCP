@@ -102,6 +102,21 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '10mb' }));
 
+// 根路径 - 显示 API 信息
+app.get('/', (_req: Request, res: Response) => {
+  res.json({
+    name: 'Finance MCP Server',
+    version: '1.0.0',
+    description: 'A Model Context Protocol server for financial data',
+    endpoints: {
+      health: '/health',
+      mcp: '/mcp',
+      terminate: '/terminate'
+    },
+    status: 'running'
+  });
+});
+
 app.get('/health', (_req: Request, res: Response) => {
   res.json({ status: 'healthy', transport: 'streamable-http', activeSessions: sessions.size });
 });
