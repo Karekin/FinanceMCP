@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build:vercel": "tsc",
     "test": "npm run build && node -e \"console.log('Testing build files...'); require('./build/index.js'); console.log('✅ index.js loads successfully');\" && node -e \"console.log('Testing httpServer...'); require('./build/httpServer.js'); console.log('✅ httpServer.js loads successfully');\" && echo '✅ All tests passed!'",
     "prepare": "npm run build",
     "watch": "tsc --watch",
