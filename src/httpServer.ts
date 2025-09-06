@@ -291,10 +291,16 @@ app.get('/terminate', (_req: Request, res: Response) => {
   return res.status(200).json({ ok: true });
 });
 
-app.listen(PORT, () => {
-  console.log(`Streamable HTTP MCP Server http://localhost:${PORT}`);
-  console.log(`MCP endpoint: http://localhost:${PORT}/mcp`);
-  console.log(`Health: http://localhost:${PORT}/health`);
-});
+// 在 Vercel 中不需要 app.listen()
+// Vercel 会自动处理服务器启动
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Streamable HTTP MCP Server http://localhost:${PORT}`);
+    console.log(`MCP endpoint: http://localhost:${PORT}/mcp`);
+    console.log(`Health: http://localhost:${PORT}/health`);
+  });
+}
+
+export default app;
 
 
