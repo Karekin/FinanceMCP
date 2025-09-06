@@ -92,15 +92,32 @@ function extractTokenFromHeaders(req: Request): string | undefined {
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 
+// 生产环境 CORS 配置
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+  ? (process.env.ALLOWED_ORIGINS?.split(',') || ['https://finance-mcp-ten.vercel.app'])
+  : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:8080'];
+
 app.use(cors({
-  origin: '*',
+  origin: allowedOrigins,
   methods: ['GET','POST','OPTIONS'],
   allowedHeaders: [
     'Content-Type','Accept','Authorization','Mcp-Session-Id','Last-Event-ID','X-Tenant-Id','X-Api-Key','X-Tushare-Token'
   ],
-  exposedHeaders: ['Content-Type','Mcp-Session-Id']
+  exposedHeaders: ['Content-Type','Mcp-Session-Id'],
+  credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
+
+// 请求日志中间件
+app.use((req: Request, res: Response, next) => {
+  const timestamp = new Date().toISOString();
+  const method = req.method;
+  const url = req.url;
+  const userAgent = req.get('User-Agent') || 'Unknown';
+  
+  console.log(`[${timestamp}] ${method} ${url} - ${userAgent}`);
+  next();
+});
 
 // 根路径 - 显示 API 信息
 app.get('/', (_req: Request, res: Response) => {
@@ -315,6 +332,32 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`Health: http://localhost:${PORT}/health`);
   });
 }
+
+// 全局错误处理中间件
+app.use((error: any, req: Request, res: Response, next: any) => {
+  console.error(`[ERROR] ${new Date().toISOString()} - ${error.message}`, error.stack);
+  
+  if (res.headersSent) {
+    return next(error);
+  }
+  
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: process.env.NODE_ENV === 'production' 
+      ? 'Something went wrong' 
+      : error.message,
+    timestamp: new Date().toISOString()
+  });
+});
+
+// 404 处理
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    error: 'Not Found',
+    message: `Route ${req.method} ${req.originalUrl} not found`,
+    timestamp: new Date().toISOString()
+  });
+});
 
 export default app;
 
