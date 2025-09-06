@@ -10,7 +10,7 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc && cp build/httpServer.js . && cp build/config.js . && cp -r build/tools .",
+    "build": "tsc",
     "build:vercel": "tsc && cp build/httpServer.js . && cp build/config.js . && cp -r build/tools .",
     "test": "npm run build && node -e \"console.log('Testing build files...'); require('./build/index.js'); console.log('✅ index.js loads successfully');\" && node -e \"console.log('Testing httpServer...'); require('./build/httpServer.js'); console.log('✅ httpServer.js loads successfully');\" && echo '✅ All tests passed!'",
     "prepare": "npm run build",

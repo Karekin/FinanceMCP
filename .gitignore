@@ -65,3 +65,7 @@ MCP业务层构建指南.md
 *.csv
 main.py
 .vercel
+build/
+config.js
+tools/
+httpServer.js

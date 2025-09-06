@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "httpServer.js",
-      "use": "@vercel/node"
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": ".",
+  "functions": {
+    "httpServer.js": {
+      "maxDuration": 30
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
