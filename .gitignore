@@ -64,3 +64,4 @@ MCP业务层构建指南.md
 /工作任务跟踪表*
 *.csv
 main.py
+.vercel
