@@ -246,6 +246,38 @@
 
 </details>
 
+## 🚀 GitHub Actions 自动部署
+
+**🎉 一键部署，全自动化！**
+
+本项目支持通过GitHub Actions实现完全自动化的CI/CD部署：
+
+### 🌟 部署特性
+- **🔄 自动构建** - 推送代码自动触发构建和测试
+- **🐳 Docker部署** - 自动构建多架构Docker镜像并推送到Docker Hub
+- **📦 NPM发布** - 创建标签自动发布到NPM
+- **🌐 多平台部署** - 同时部署到Vercel、Railway、Render、DigitalOcean
+- **🛡️ 安全扫描** - 自动进行代码安全审计和依赖检查
+- **📊 监控告警** - 部署状态实时监控
+
+### ⚡ 快速开始
+1. **Fork本项目** 到你的GitHub账户
+2. **配置Secrets** - 在仓库设置中添加必要的API密钥
+3. **推送代码** - 推送到main分支即可自动部署
+4. **创建标签** - 使用`git tag v4.0.1 && git push origin v4.0.1`发布新版本
+
+### 📋 支持的部署平台
+- **Docker Hub** - 容器镜像托管
+- **Vercel** - 边缘计算部署
+- **Railway** - 云原生部署
+- **Render** - 全栈应用托管
+- **DigitalOcean** - 云服务器部署
+
+### 🔧 详细配置
+查看 [GitHub Actions 部署指南](.github/README.md) 了解完整的配置说明。
+
+---
+
 ## 🔧 本地部署（Streamable HTTP）
 
 <details>

@@ -223,7 +223,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const format = request.params.arguments?.format ? String(request.params.arguments.format) : undefined;
       return await timestampTool.run({ format });
     }
-
     case "finance_news": {
       const query = String(request.params.arguments?.query);
       return await financeNews.run({ query });
