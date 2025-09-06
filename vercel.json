@@ -1,16 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:vercel",
-  "outputDirectory": ".",
-  "functions": {
-    "httpServer.js": {
-      "maxDuration": 30
+  "builds": [
+    {
+      "src": "src/httpServer.ts",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "httpServer.js"
+      "dest": "src/httpServer.ts"
     }
   ],
   "env": {
