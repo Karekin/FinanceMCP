@@ -2,25 +2,25 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { randomUUID } from "node:crypto";
-import { runWithRequestContext } from "./config";
+import { runWithRequestContext } from "./config.js";
 
 // 工具导入
-import { financeNews } from "./tools/financeNews";
-import { stockData } from "./tools/stockData";
-import { indexData } from "./tools/indexData";
-import { macroEcon } from "./tools/macroEcon";
-import { companyPerformance } from "./tools/companyPerformance";
-import { fundData } from "./tools/fundData";
-import { fundManagerByName, runFundManagerByName } from "./tools/fundManagerByName";
-import { convertibleBond } from "./tools/convertibleBond";
-import { blockTrade } from "./tools/blockTrade";
-import { moneyFlow } from "./tools/moneyFlow";
-import { marginTrade } from "./tools/marginTrade";
-import { companyPerformance_hk } from "./tools/companyPerformance_hk";
-import { companyPerformance_us } from "./tools/companyPerformance_us";
-import { csiIndexConstituents } from "./tools/csiIndexConstituents";
-import { dragonTigerInst } from "./tools/dragonTigerInst";
-import { hotNews } from "./tools/hotNews";
+import { financeNews } from "./tools/financeNews.js";
+import { stockData } from "./tools/stockData.js";
+import { indexData } from "./tools/indexData.js";
+import { macroEcon } from "./tools/macroEcon.js";
+import { companyPerformance } from "./tools/companyPerformance.js";
+import { fundData } from "./tools/fundData.js";
+import { fundManagerByName, runFundManagerByName } from "./tools/fundManagerByName.js";
+import { convertibleBond } from "./tools/convertibleBond.js";
+import { blockTrade } from "./tools/blockTrade.js";
+import { moneyFlow } from "./tools/moneyFlow.js";
+import { marginTrade } from "./tools/marginTrade.js";
+import { companyPerformance_hk } from "./tools/companyPerformance_hk.js";
+import { companyPerformance_us } from "./tools/companyPerformance_us.js";
+import { csiIndexConstituents } from "./tools/csiIndexConstituents.js";
+import { dragonTigerInst } from "./tools/dragonTigerInst.js";
+import { hotNews } from "./tools/hotNews.js";
 
 // 时间戳工具（保留）
 const timestampTool = {
