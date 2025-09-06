@@ -10,8 +10,8 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc && mkdir -p api && cp build/httpServer.js api/",
-    "build:vercel": "tsc && mkdir -p api && cp build/httpServer.js api/",
+    "build": "tsc && cp build/httpServer.js .",
+    "build:vercel": "tsc && cp build/httpServer.js .",
     "test": "npm run build && node -e \"console.log('Testing build files...'); require('./build/index.js'); console.log('✅ index.js loads successfully');\" && node -e \"console.log('Testing httpServer...'); require('./build/httpServer.js'); console.log('✅ httpServer.js loads successfully');\" && echo '✅ All tests passed!'",
     "prepare": "npm run build",
     "watch": "tsc --watch",

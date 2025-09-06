@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "api/httpServer.js": {
-      "maxDuration": 30
+  "builds": [
+    {
+      "src": "httpServer.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/httpServer.js"
+      "dest": "httpServer.js"
     }
   ],
   "env": {
